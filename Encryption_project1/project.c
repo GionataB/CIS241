@@ -1,7 +1,13 @@
+/*************************************************************
+CIS 241 project 1
+@author Gionata Bonazzi
+@version 13 February 2018
+*************************************************************/
 #include "project.h"
-#define SIZE 27 //considering space for 26 letters of the alphabet and the '\0' at the end
+#define SIZE 27 //considering space for 26 letters of the alphabet and the '\0' at the end.
 
-char* encryptionAlphabet(char* word){//FIXME: works on the debug.c, but not here.
+
+char* encryptionAlphabet(char* word){
     char* result = malloc(SIZE*sizeof(char)); //The encrypted alphabet
     memset(result, '\0', sizeof(*result));//Set every char in result to '\0'
     int found = 1; //using it as a boolean
@@ -23,24 +29,13 @@ char* encryptionAlphabet(char* word){//FIXME: works on the debug.c, but not here
     return result;
 }
 
-/*************************************************************
- Create a rearranged alphabet.
- start with the standard alphabet from 'a' to 'z'.
- Take the encrypted alphabet as well.
- The relative position of a character in the ecnrypted alphabet and 'a' is the index for the new array.
- In that position, put the first available letter from the standard alphabet.
- A letter is available when it has never been copied in the new array, so repetition is not allowed.
- the array's scan goes from the left to the right (from 0 to the end).
- This way, the relative position of an encrypted letter from 'a' gives the index for its decrypted counterpart in the new array.
- @param eArr the encrypted alphabet.
- *************************************************************/
 char* decryptionAlphabet(char* word){
     char* encAlphabet = encryptionAlphabet(word);
     char* decAlphabet = malloc(SIZE * sizeof(char));
     int index;
     for(int i = 0; i < SIZE; i++){
-        index = encAlphabet[i] - 'a';
-        decAlphabet[index] = (char) ('a' + i);
+        index = encAlphabet[i] - 'a'; //The relative position of a letter from 'a' is the index of the rearranged array
+        decAlphabet[index] = (char) ('a' + i); //Assign a letter of the alphabet to the index linked to its encrypted counterpart.
     }
     decAlphabet[SIZE-1] = '\0';
     free(encAlphabet);
@@ -54,12 +49,13 @@ void encryption(char* key, FILE* source, FILE* target){
     while(!feof(source)){
         fscanf(source, "%c", &och);
         if(islower(och)) ech = encAlphabet[och-'a'];
-        else if(isupper(och)) ech = toupper(encAlphabet[och-'A']);
-        else ech = och;
+        else if(isupper(och)) ech = toupper(encAlphabet[och-'A']); //Preserve the original uppercase letter.
+        else ech = och; //Non-letter chars are maintained as they are.
         fprintf(target, "%c", ech);
     }
-    free(encAlphabet);
+    free(encAlphabet); //free the memory allocated.
 }
+
 void decryption(char* key, FILE* source, FILE* target){
     char* decAlphabet = decryptionAlphabet(key); //the array used for decryption
     char ech; //the encrypted character
