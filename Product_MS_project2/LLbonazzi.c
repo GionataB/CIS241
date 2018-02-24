@@ -1,3 +1,4 @@
+#include <string.h>
 #include "file_utilities.h"
 #include "project2.h"
 
@@ -68,21 +69,37 @@ void sell(struct node *head, char* name){
     delete(head, name);
 }
 
-//FIXME: DELETE THIS
-int listSize(struct node *head){
-  int size = 0;
-  for(; head->next != NULL; head = head->next) size++;
-  return size;
+void save(struct node *head, char* filename, int size){
+  char* str = (char*) malloc(size*sizeof(char));
+  strcpy(str, "Saved Linked List\n");
+  for(int i = 1; head->next->next != NULL; head = head->next, i++){
+    strcat(str, "Element number: ");
+    strcat(str, i);
+    strcat(str, "\n");
+    strcat(str, "name: ");
+    strcat(str, head->next->name);
+    strcat(str, "\t");
+    strcat(str, "unit: ");
+    strcat(str, head->next->unit);
+    strcat(str, "\t");
+    strcat(str, "price: ");
+    strcat(str, head->next->price);
+    strcat(str, "\t");
+    strcat(str, "quantity: ");
+    strcat(str, head->next->quantity);
+    strcat(str, "\n");
+  }
+  write_file(filename, str, size);
+  free(str);
 }
 
-void save(struct node *head, char* filename){
-  int size = listSize(head);//FIXME: DELETE THIS
-  char* str = (char*) malloc(size*sizeof(char)); //FIXME: DELETE THIS
-}
+
 
 void deleteAll(struct node *head){
   if(head != NULL){
     deleteAll(head->next); //Recursion
+    free(head->name); //Assume the name is a dinamically allocated string
+    free(head->unit); //Assume the unit is a dinamically allocated string
     free(head); //Free from the last element to the head.
   }
 }

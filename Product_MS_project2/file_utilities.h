@@ -1,7 +1,6 @@
 /*******************************************************************
  This header declares functions to save and load a file.
  @author Gionata Bonazzi
- @author Marshal Brummel
  @version 29 January 2018
  *******************************************************************/
 

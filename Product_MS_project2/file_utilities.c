@@ -1,7 +1,6 @@
 /*******************************************************************
  Implementation of the functions declared in 'file_utilities.h'
  @author Gionata Bonazzi
- @author Marshal Brummel
  @version 7 February 2018
  *******************************************************************/
 
