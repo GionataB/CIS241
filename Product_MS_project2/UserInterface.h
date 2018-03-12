@@ -7,10 +7,22 @@
 void printOptions();
 
 /*******************************************************************************
+* Asks the user for a product's name.
+* @return a string containing the product's name.
+*******************************************************************************/
+char* askName();
+
+/*******************************************************************************
 * Delete the list and exit the program.
 * @param head the head of the list.
 *******************************************************************************/
 void close(struct node* head);
+
+/*******************************************************************************
+* Create a list with the head 'head'.
+* @param head the head of the list.
+*******************************************************************************/
+int makeList(struct node** head);
 
 /*******************************************************************************
 * Asks for a product, and insert it in the list.
@@ -31,8 +43,9 @@ void deleteProduct(struct node* head);
 /*******************************************************************************
 * Delete everything in the list.
 * @param head the head of the list.
+* @return 1 if the list has been deleted.
 *******************************************************************************/
-void deleteList(struct node* head);
+int deleteList(struct node* head);
 
 /*******************************************************************************
 * Asks for a product, and display whether the product is in the list or not.

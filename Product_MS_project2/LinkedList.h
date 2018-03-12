@@ -27,7 +27,7 @@ struct node
 * a pointer to the next node, it does not contain any data.
 * @return a pointer to the head of the linked list.
 *******************************************************************************/
-struct node *init ();
+struct node* init ();
 
 /*******************************************************************************
 * Insert a new node at the end of the linked list pointed by head.
@@ -78,8 +78,10 @@ void purchase(struct node* head, char* name);
 * If the quantity of the item after selling is zero, the node gets deleted.
 * @param head the head to the linked list.
 * @param name the name of the product to decrease.
+* @return 0 if the product has been sold but remains in the list, 1 if the
+*					product has been sold and removed from the list.
 *******************************************************************************/
-void sell(struct node* head, char* name);
+int sell(struct node* head, char* name);
 
 /*******************************************************************************
 * Count the number of nodes in the list.
@@ -90,12 +92,14 @@ void sell(struct node* head, char* name);
 int listSize(struct node* head);
 
 /*******************************************************************************
-* Save the data of all the nodes in the list on a file.
+* Save the data of all the nodes in the list on a file. If a file already
+* exists, the function deletes it and create a new one.
+* This allows to overwrite the informations without having to clean the file.
 * @param head the head to the linked list.
 * @param filename the name of the file.
 * @param size the total size of the data to be saved.
 *******************************************************************************/
-void save(struct node* head, char* filename, int size);
+int save(struct node* head, char* filename);
 
 /*******************************************************************************
 * Delete the entire linked list including the head.

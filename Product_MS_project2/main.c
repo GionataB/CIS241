@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "LinkedList.h"
 #include "UserInterface.h"
 
 int main(int argc, char** argv){
@@ -20,15 +19,25 @@ int main(int argc, char** argv){
     }
     switch(option){
       case 0: close(head);
-      case 1: head = init();
+              break;
+      case 1: listExists = makeList(&head);
+              break;
       case 2: insertProduct(head);
+              break;
       case 3: deleteProduct(head);
-      case 4: deleteList(head);
+              break;
+      case 4: listExists = deleteList(head);
+              break;
       case 5: searchProduct(head);
+              break;
       case 6: displayProducts(head);
+              break;
       case 7: purchaseProduct(head);
+              break;
       case 8: sellProduct(head);
+              break;
       case 9: saveList(head);
+              break;
       default: printf("Unkown option. Choose an option from the list.");
     }
   }

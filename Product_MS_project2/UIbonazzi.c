@@ -1,4 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
 #import "UserInterface.h"
+#import "LinkedList.h"
 
 void printOptions(){
   printf("0: Close the program.\t1: Create a list.\n");
@@ -8,17 +11,35 @@ void printOptions(){
   printf("8: Sell a product.\t9: Save to file.\n");
 }
 
-void close(struct node* head){
-  deleteAll(head);
-  exit(1);
-}
-
-void insertProduct(struct node* head){
+char* askName(){
   printf("Please insert a name for the product: ");
   char* buffer = (char*) malloc(1024 * sizeof(char));
   fgets(buffer, 1024, stdin);
   char* name = (char*) malloc(124 * sizeof(char));
   sscanf(buffer, "%124s", name);
+  free(buffer);
+  return name;
+}
+
+void close(struct node* head){
+  deleteAll(head);
+  exit(1);
+}
+
+int makeList(struct node** head){
+  *head = init();
+  if(*head != NULL){
+    printf("List succesfully created.");
+    return 0;
+  }
+  else{
+    printf("Error in creating the list.");
+    return 1;
+  }
+}
+
+void insertProduct(struct node* head){
+  char* name = askName();
   if(search(head, name) == 1){
     printf("The product is already in the list.\n");
     free(buffer);
@@ -63,12 +84,7 @@ void insertProduct(struct node* head){
 }
 
   void deleteProduct(struct node* head){
-    printf("Please insert a name for the product: ");
-    char* buffer = (char*) malloc(1024 * sizeof(char));
-    fgets(buffer, 1024, stdin);
-    char* name = (char*) malloc(124 * sizeof(char));
-    sscanf(buffer, "%124s", name);
-    free(buffer);
+    char* name = askName();
     if(search(head, name) == 1)
       printf("The product is not in the list.\n");
     else{
@@ -76,4 +92,55 @@ void insertProduct(struct node* head){
       printf("The product has been deleted.\n");
     }
     free(name);
+  }
+
+  int deleteList(struct node* head){
+    deleteAll(head);
+    return 1;
+  }
+
+
+
+  void searchProduct(struct node* head){
+    char* name = askName();
+    if(search(head, name) == 1)
+      printf("The product is not in the list.\n");
+    else{
+      printf("The product is in the list.\n");
+    }
+    free(name);
+  }
+
+  void displayProducts(struct node* head){
+    printf("Displaying the products in the list...\n")
+    displayAll(head);
+    printf("End.\n");
+  }
+
+  void purchaseProduct(struct node* head){
+    char* name = askName();
+    if(search(head, name) == 1)
+      printf("The product is not in the list.\n");
+    else
+      purchase(head, name);
+    free(name);
+  }
+
+  void sellProduct(struct node* head){
+    char* name = askName();
+    if(search(head, name) == 1)
+      printf("The product is not in the list.\n");
+    else{
+      printf("The product has been sold.\n");
+      if(sell(head, name) == 1)
+        printf("The product has been completely sold and removed from the list.");
+    }
+    free(name)
+  }
+
+  void saveList(struct node* head){
+    if(save(head, "Products.txt") != 0)
+      printf("The list has been saved succesfully.\n");
+    else
+      printf("Error in saving the list to a file.\n");
   }

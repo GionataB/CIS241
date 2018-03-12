@@ -68,11 +68,14 @@ void purchase(struct node* head, char* name){
   temp->quantity++;
 }
 
-void sell(struct node *head, char* name){
+int sell(struct node *head, char* name){
   struct node* temp = search(head, name);
   temp->quantity--;
-  if(temp->quantity == 0)
+  if(temp->quantity == 0){
     delete(head, name);
+    return 1;
+  }
+  return 0;
 }
 
 int listSize(struct node* head){
@@ -81,7 +84,7 @@ int listSize(struct node* head){
   return size;
 }
 
-void save(struct node* head, char* filename){
+int save(struct node* head, char* filename){
   int size = 19 + (listSize(head) * 160) + 100;
   char* str = (char*) malloc(size*sizeof(char));
   strcpy(str, "Saved Linked List\n");//18 chars, constant
@@ -104,8 +107,9 @@ void save(struct node* head, char* filename){
   } //total: 160 chars per node.
   strcat(str, "\0");//1 char, constant
   int strSize = strlen(str); //To have a more precise size to pass to write_file.
-  write_file(filename, str, strSize);
+  int fileSize = write_file(filename, str, strSize);
   free(str);
+  return fileSize;
 }
 
 void deleteAll(struct node *head){
