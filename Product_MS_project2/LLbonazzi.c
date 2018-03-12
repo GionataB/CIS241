@@ -1,8 +1,13 @@
+/*******************************************************************************
+* Implementation of the functions defined inside LinkedList.h
+* @Author Gionata Bonazzi
+* @Version 4 March 2018
+*******************************************************************************/
 #include<stdio.h>
 #include<stdlib.h>
 #include <string.h>
 #include "file_utilities.h"
-#include "project2.h"
+#include "LinkedList.h"
 
 struct node* init(){
   struct node *head = (struct node*) malloc(sizeof(struct node*));
@@ -20,27 +25,26 @@ void insert(struct node* head, char* name, char* unit, int price, int quantity){
     head->next->next = NULL;
   }
   else
-    insert(head->next, name, unit, price, quantity); //Recursion
+    return insert(head->next, name, unit, price, quantity); //Recursion
 }
 
 void delete(struct node* head, char* name){
   if(strcmp(head->next->name, name)){
     struct node *temp = head->next;
     head->next = head->next->next;
+    free(temp->name);
+    free(temp->unit);
     free(temp);
   }
   else
     delete(head->next, name);
 }
 
-struct node* search(struct node* head, char* name){
-  if(head->next == NULL){
-    printf("Not Found");
-    return NULL;
-  }
+int search(struct node* head, char* name){
+  if(head->next == NULL)
+    return 1;
   if(strcmp(head->next->name, name))
-    printf("Found");
-    return head->next;
+    return 0;
   else
     search(head->next, name);
 }
@@ -71,10 +75,14 @@ void sell(struct node *head, char* name){
     delete(head, name);
 }
 
+int listSize(struct node* head){
+  int size = 0;
+  for(size; head->next != NULL; head = head->next);
+  return size;
+}
+
 void save(struct node* head, char* filename){
-  int size = 19 + (listSize(head) * 160) + 100;//FIXME: create the method listSize, and add the constants to that.
-  //FIXME: the formula for the size: 19 + (listSize() * 160);
-  //FIXME: the 100 is to have a bit of room.
+  int size = 19 + (listSize(head) * 160) + 100;
   char* str = (char*) malloc(size*sizeof(char));
   strcpy(str, "Saved Linked List\n");//18 chars, constant
   for(int i = 1; head->next->next != NULL; head = head->next, i++){

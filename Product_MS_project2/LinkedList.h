@@ -1,3 +1,9 @@
+/*******************************************************************************
+* Header file with functions' declarations for a linked list.
+* @Author Gionata Bonazzi
+* @Version 4 March 2018
+*******************************************************************************/
+
 #ifndef LL_PROJECT2_H
 #define LL_PROJECT2_H
 
@@ -31,7 +37,7 @@ struct node *init ();
 * @param price the price per item of the product saved in the node.
 * @param quantity the number of items of the same product available.
 *******************************************************************************/
-void insert(struct node* head, char* name, char* unit, int price, int quantity); //Create a new node to store data and insert it to the end of current linked list; the head node will still be empty and data in the array are not stored in head node
+void insert(struct node* head, char* name, char* unit, int price, int quantity);
 
 /*******************************************************************************
 * Delete the desired node from the list.
@@ -42,14 +48,11 @@ void delete(struct node* head, char* name);
 
 /*******************************************************************************
 * Search the list for the product whose name is the same as the name provided.
-* A different message will be showed on the console if the product is found, or
-* it is not.
 * @param head the head to the linked list.
 * @param name the name of the product to search.
-* @return A pointer to the node if the product is in the list, or null if the
-*					product is not in the list.
+* @return 0 if the product has been found, 1 if it was not.
 *******************************************************************************/
-struct node* search(struct node* head, char* name);
+int search(struct node* head, char* name);
 
 /*******************************************************************************
 * Print all the data of the given node.
@@ -76,7 +79,15 @@ void purchase(struct node* head, char* name);
 * @param head the head to the linked list.
 * @param name the name of the product to decrease.
 *******************************************************************************/
-void sell(struct node *head, char* name);
+void sell(struct node* head, char* name);
+
+/*******************************************************************************
+* Count the number of nodes in the list.
+* It does not count the head node.
+* @param head the head to the linked list.
+* @return the number of nodes in the list, except the head node.
+*******************************************************************************/
+int listSize(struct node* head);
 
 /*******************************************************************************
 * Save the data of all the nodes in the list on a file.
@@ -90,6 +101,6 @@ void save(struct node* head, char* filename, int size);
 * Delete the entire linked list including the head.
 * @param head the head to the linked list.
 *******************************************************************************/
-void deleteAll (struct node *head);
+void deleteAll (struct node* head);
 
 #endif
