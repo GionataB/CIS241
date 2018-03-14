@@ -55,6 +55,15 @@ void delete(struct node* head, char* name);
 int search(struct node* head, char* name);
 
 /*******************************************************************************
+* Search the list for the product whose name is the same as the name provided.
+* @param head the head to the linked list.
+* @param name the name of the product to search.
+* @return The object if it is in the list, or NULL if it is not.
+*******************************************************************************/
+struct node* find(struct node* head, char* name);
+
+
+/*******************************************************************************
 * Print all the data of the given node.
 * @param product the node whose data are to be printed.
 *******************************************************************************/

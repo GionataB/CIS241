@@ -1,6 +1,8 @@
 #ifndef INTERFACE_P2_H
 #define INTERFACE_P2_H
 
+#import "LinkedList.h"
+
 /*******************************************************************************
 * Print a list of options that the user can select.
 *******************************************************************************/

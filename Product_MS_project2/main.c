@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "UserInterface.h"
+#include "LinkedList.h"
 
 int main(int argc, char** argv){
   struct node* head = NULL;
@@ -13,12 +14,17 @@ int main(int argc, char** argv){
     fgets(buffer, 1024, stdin);
     sscanf(buffer, "%u", &option);
     free(buffer);
+    if(option == 0 && listExists != 0){
+      printf("Closing the program...\n");
+      exit(0);
+    }
     if(option != 1 && listExists != 0){
-      printf("First, create a list by selecting option 1.");
+      printf("First, create a list by selecting option 1.\n");
       continue;
     }
     switch(option){
-      case 0: close(head);
+      case 0: printf("Closing the program...\n");
+              close(head);
               break;
       case 1: listExists = makeList(&head);
               break;
@@ -38,7 +44,7 @@ int main(int argc, char** argv){
               break;
       case 9: saveList(head);
               break;
-      default: printf("Unkown option. Choose an option from the list.");
+      default: printf("Unkown option. Choose an option from the list.\n");
     }
   }
 }
