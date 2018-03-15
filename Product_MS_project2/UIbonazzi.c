@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #import "UserInterface.h"
 #import "LinkedList.h"
 
@@ -13,12 +14,9 @@ void printOptions(){
 
 char* askName(){
   printf("Please insert a name for the product: ");
-  char* buffer = (char*) malloc(1024 * sizeof(char));
-  fgets(buffer, 1024, stdin);
-  char* name = (char*) malloc(125 * sizeof(char));
-  sscanf(buffer, "%124s", name);
-  name[124] = '\0';
-  free(buffer);
+  char* name = (char*) malloc(1024 * sizeof(char));
+  scanf("%s", name);
+  strcat(name, "\0");
   return name;
 }
 
@@ -48,18 +46,12 @@ void insertProduct(struct node* head){
   }
   else{
     printf("Please insert a unit for the product: ");
-    char* unit = (char*) malloc(33*sizeof(char));
-    char* buffer = (char*) malloc(1024 * sizeof(char));
-    fgets(buffer, 1024, stdin);
-    sscanf(buffer, "%32s", unit);
-    unit[32] = '\0';
-    free(buffer);
+    char* unit = (char*) malloc(1024 * sizeof(char));
+    scanf("%s", unit);
+    strcat(unit, "\0");
     printf("Please insert a price for the product: ");
     int price = 0;
-    buffer = (char*) malloc(1024 * sizeof(char));
-    fgets(buffer, 1024, stdin);
-    sscanf(buffer, "%u", &price);
-    free(buffer);
+    scanf("%u", &price);
     if(price <= 0){
       printf("The price for a product must be a positive integer.\n");
       free(name);
@@ -68,10 +60,7 @@ void insertProduct(struct node* head){
     }
     printf("Please insert a quantity for the product: ");
     int quantity = 0;
-    buffer = (char*) malloc(1024 * sizeof(char));
-    fgets(buffer, 1024, stdin);
-    sscanf(buffer, "%u", &quantity);
-    free(buffer);
+    scanf("%u", &quantity);
     if(quantity <= 0){
       printf("The quantity of a product must be a positive integer.\n");
       free(name);
@@ -84,10 +73,13 @@ void insertProduct(struct node* head){
 }
 
   void deleteProduct(struct node* head){
+    printf("BEFORE\n");
     char* name = askName();
+    printf("AFTER\n");
     if(search(head, name) == 1)
       printf("The product is not in the list.\n");
     else{
+      printf("OUTSIDE\n");
       delete(head, name);
       printf("The product has been deleted.\n");
     }
@@ -112,17 +104,19 @@ void insertProduct(struct node* head){
   }
 
   void displayProducts(struct node* head){
-    printf("Displaying the products in the list...\n");
+    printf("Displaying the products in the list...\n\n");
     displayAll(head);
-    printf("End.\n");
+    printf("End.\n\n");
   }
 
   void purchaseProduct(struct node* head){
     char* name = askName();
     if(search(head, name) == 1)
       printf("The product is not in the list.\n");
-    else
+    else{
+      printf("You bought one unit of %s.\n", name);
       purchase(head, name);
+    }
     free(name);
   }
 

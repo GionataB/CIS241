@@ -10,7 +10,7 @@
 #include "LinkedList.h"
 
 struct node* init(){
-  struct node *head = (struct node*) malloc(sizeof(struct node*));
+  struct node* head = (struct node*) malloc(sizeof(struct node));
   head->next = NULL;
   head->name = "";
   head->unit = "";
@@ -19,7 +19,7 @@ struct node* init(){
 
 void insert(struct node* head, char* name, char* unit, int price, int quantity){
   if(head->next == NULL){
-    head->next = (struct node*) malloc(sizeof(struct node*));
+    head->next = (struct node*) malloc(sizeof(struct node));
     head->next->name = name;
     head->next->unit = unit;
     head->next->price = price;
@@ -31,7 +31,7 @@ void insert(struct node* head, char* name, char* unit, int price, int quantity){
 }
 
 void delete(struct node* head, char* name){
-  if(strcmp(head->next->name, name)){
+  if(strcmp(head->next->name, name) == 0){
     struct node *temp = head->next;
     head->next = head->next->next;
     free(temp->name);
@@ -43,10 +43,12 @@ void delete(struct node* head, char* name){
 }
 
 int search(struct node* head, char* name){
-  if(head->next == NULL)
+  if(head->next == NULL){
     return 1;
-  if(strcmp(head->next->name, name))
+  }
+  else if(strcmp(head->next->name, name) == 0){
     return 0;
+  }
   else
     return search(head->next, name);
 }
@@ -61,15 +63,16 @@ struct node* find(struct node* head, char* name){
 }
 
 void displayProduct(struct node* product){
-  printf("Product's name:\t%s\n", product->next->name);
-  printf("Product's unit:\t%s\n", product->next->unit);
-  printf("Product's price:\t%d\n", product->next->price);
-  printf("Product's quantity:\t%d\n\n", product->next->quantity);
+  printf("Product's name:\t%s\n", product->name);
+  printf("Product's unit:\t%s\n", product->unit);
+  printf("Product's price:\t%d\n", product->price);
+  printf("Product's quantity:\t%d\n\n", product->quantity);
 }
 
 void displayAll(struct node* head){
-  if(head->next != NULL) //starts from head->next so the head's data won't be printed
+  if(head->next != NULL){ //starts from head->next so the head's data won't be printed
     displayProduct(head->next); //recursion
+  }
 }
 
 void purchase(struct node* head, char* name){
@@ -101,7 +104,7 @@ int save(struct node* head, char* filename){
   char* str = (char*) malloc(size*sizeof(char));
   strcpy(str, "Saved Linked List\n");//18 chars, constant
   char* temp;
-  for(int i = 1; head->next->next != NULL; head = head->next, i++){
+  for(int i = 1; head->next != NULL; head = head->next, i++){
     strcat(str, "Element number: ");//16 chars per node, constant
     temp = (char*) malloc(4 * sizeof(char));//variable, max of 4 chars. (max 9999 nodes in the list)
     sprintf(temp, "%d", i); //Convert int to string

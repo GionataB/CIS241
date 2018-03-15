@@ -10,10 +10,7 @@ int main(int argc, char** argv){
   while(option != 0){
     option = -1; //reset the option so that there are no errors.
     printOptions(); //print the options list.
-    char* buffer = (char*) malloc(1024 * sizeof(char));
-    fgets(buffer, 1024, stdin);
-    sscanf(buffer, "%u", &option);
-    free(buffer);
+    scanf("%u", &option);
     if(option == 0 && listExists != 0){
       printf("Closing the program...\n");
       exit(0);
@@ -21,6 +18,9 @@ int main(int argc, char** argv){
     if(option != 1 && listExists != 0){
       printf("First, create a list by selecting option 1.\n");
       continue;
+    }
+    if(option == 1 && listExists == 0){
+      deleteList(head);
     }
     switch(option){
       case 0: printf("Closing the program...\n");
