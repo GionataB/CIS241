@@ -63,15 +63,16 @@ struct node* find(struct node* head, char* name){
 }
 
 void displayProduct(struct node* product){
-  printf("Product's name:\t%s\n", product->name);
-  printf("Product's unit:\t%s\n", product->unit);
+  printf("Product's name:\t\t%s\n", product->name);
+  printf("Product's unit:\t\t%s\n", product->unit);
   printf("Product's price:\t%d\n", product->price);
   printf("Product's quantity:\t%d\n\n", product->quantity);
 }
 
 void displayAll(struct node* head){
   if(head->next != NULL){ //starts from head->next so the head's data won't be printed
-    displayProduct(head->next); //recursion
+    displayProduct(head->next);
+    displayAll(head->next); //recursion
   }
 }
 

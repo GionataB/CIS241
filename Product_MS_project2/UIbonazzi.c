@@ -5,7 +5,7 @@
 #import "LinkedList.h"
 
 void printOptions(){
-  printf("0: Close the program.\t1: Create a list.\n");
+  printf("\n0: Close the program.\t1: Create a list.\n");
   printf("2: Insert a product.\t3: Delete a product.\n");
   printf("4: Delete the list.\t5: Search a product.\n");
   printf("6: Display products.\t7: Purchase a product.\n");
@@ -106,7 +106,7 @@ void insertProduct(struct node* head){
   void displayProducts(struct node* head){
     printf("Displaying the products in the list...\n\n");
     displayAll(head);
-    printf("End.\n\n");
+    printf("End.\n");
   }
 
   void purchaseProduct(struct node* head){
