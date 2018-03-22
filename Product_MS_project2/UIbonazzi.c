@@ -73,13 +73,10 @@ void insertProduct(struct node* head){
 }
 
   void deleteProduct(struct node* head){
-    printf("BEFORE\n");
     char* name = askName();
-    printf("AFTER\n");
     if(search(head, name) == 1)
       printf("The product is not in the list.\n");
     else{
-      printf("OUTSIDE\n");
       delete(head, name);
       printf("The product has been deleted.\n");
     }
