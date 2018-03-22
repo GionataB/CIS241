@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#import "UserInterface.h"
-#import "LinkedList.h"
+#include "UserInterface.h"
+#include "LinkedList.h"
 
 void printOptions(){
   printf("\n0: Close the program.\t1: Create a list.\n");
