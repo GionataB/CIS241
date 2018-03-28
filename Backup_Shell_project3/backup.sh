@@ -16,7 +16,7 @@ fi
 for i in $#
   if test -e "$i"
     then
-      mv "$i" "$target"
+      cp -r "$i" "$target"
   elif test "$i" = "$diskUsage"
     then
       echo "There are $(ls | wc -w) files and directories in the backup folder."
