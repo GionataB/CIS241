@@ -8,11 +8,14 @@ target=~/backup
 diskUsage="-c"
 listContent="-l"
 askHelp="--help"
-if test -e "$target"
+if test -e "$1"
   then
-    echo "The directory already exists, its content may be overwritten."
-  else
-    mkdir "$target"
+  if test -e "$target"
+    then
+      echo "The directory already exists, its content may be overwritten."
+    else
+      mkdir "$target"
+  fi
 fi
 for i
 do
