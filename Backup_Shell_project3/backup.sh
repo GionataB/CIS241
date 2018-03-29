@@ -22,7 +22,7 @@ do
   elif test "$i" = "$diskUsage"
     then
       echo "There are $(ls | wc -w) files and directories in the backup folder."
-      echo "The backup folder occupies $(du -c -b $target) bytes." #might want to put quotes around $target
+      echo "The backup folder occupies $(du -s -b $target | cut -f 1) bytes." #might want to put quotes around $target
   elif test "$i" = "$listContent" #the variables should be string, but maybe wrap the two variables in quotiation marks
     then
       ls "$target"
