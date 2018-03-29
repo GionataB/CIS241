@@ -31,7 +31,7 @@ do
       ls "$target"
   elif test "$i" = "$askHelp"
     then
-      echo -e "Syntax: ./backup targetFileList [options]\rtargetFileList is one or more file to copy\rAvailable options are:\r-c to get the number of files and directories inside the backup directory, and the total size in bytes.\r-l to list all files and directories in the backup directory.\r--help to display this message."
+      echo -e "Syntax: ./backup targetFileList [options]\ntargetFileList is one or more files to copy\nAvailable options are:\n-c to get the number of files and directories inside the backup directory, and the total size in bytes.\n-l to list all files and directories in the backup directory.\n--help to display this message."
   else
     echo "$i does not exist!"
   fi
