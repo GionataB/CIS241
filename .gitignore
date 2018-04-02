@@ -1,6 +1,7 @@
 .DS_Store
 *.pdf
 *.o
-*test*
+test.c
+test
 *program*
 *.txt
