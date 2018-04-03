@@ -29,4 +29,4 @@ if test ! -e "$target"
 fi
 #Third Task
 echo "There are $(ls | wc -w) files and directories in the current path, $(pwd)."
-echo "The files and directories in the current path occupy $(du -s -b ".." | cut -f 1) bytes."
+echo "The files and directories in the current path occupy $(du -s -b | cut -f 1) bytes."
