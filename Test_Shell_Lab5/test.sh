@@ -23,7 +23,7 @@ elif test "$1" = "$askHelp"
     echo "$1 does not exist!"
 fi
 #Second Task
-if test -ne "$target"
+if test ! -e "$target"
   then
     mkdir "$target"
 fi
